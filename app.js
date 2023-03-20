@@ -26,6 +26,18 @@ function shuffle(arr) {
   }
 }
 
+function filterCountries(arr) {
+  const banList = ['mp', 'gp', 'hk', 'fk', 'cw', 'pn', 'mq', 'cc', 'tf', 'gu', 'mo', 'pr', 'je', 'gg', 'nf', 'tk', 'fo', 'bl', 'im', 'aq', 'mf', 'ky', 'nc', 'ps', 'nu', 'vg', 'ax', 'aw', 'yt', 'bm', 'vi', 'eh', 'um', 'as', 'gf', 'ms', 'pm', 'gi', 'gs', 'sj', 'tc', 'ai', 'pf', 'sx', 'cx', 'wf', 'ck', 'io', 're', 'hm', 'sh', 'gl', 'bes islands', 'saint helena']
+  var filteredArr = []
+  arr.forEach(val => {
+    if(!banList.includes(val.altSpellings[0].toLowerCase())) {
+      filteredArr.push(val)
+    }
+  })
+
+  return filteredArr
+}
+
 function createFlag(country) {
   const divBandeira = document.createElement('div')
   divBandeira.classList.add('bandeira')
@@ -33,11 +45,10 @@ function createFlag(country) {
   const imgBandeira = document.createElement('img')
   imgBandeira.src = country.flags.png
   imgBandeira.classList.add('img-bandeira')
+  imgBandeira.addEventListener('click', () => console.log(country.altSpellings))
   divBandeira.appendChild(imgBandeira)
 
-  // const h2Nome = document.createElement('h2')
-  // h2Nome.innerText = country.translations.por.common
-  // divBandeira.appendChild(h2Nome)
+  
   
   const input = document.createElement('input')
   input.type = 'text'
@@ -60,10 +71,11 @@ async function app() {
   var data = await fetchData()
 
   shuffle(data)
+  countriesArr = filterCountries(data)
+  console.log(countriesArr)
 
-  console.log(data[1])
 
-  data.forEach(country => {
+  countriesArr.forEach(country => {
     const names = [
       formatarNomePais(country.name.common).toLowerCase(),
       formatarNomePais(country.translations.por.common).toLowerCase(),
