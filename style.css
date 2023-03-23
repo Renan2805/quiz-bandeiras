@@ -13,6 +13,7 @@ body {
   padding: 5px;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
 
   border: 1px solid black;
 
@@ -20,13 +21,13 @@ body {
 }
 
 .img-bandeira {
-  height: 150px;
+  min-height: 150px;
   width: auto;
+  max-width: 326px;
   margin: 0 auto 5px;
 }
 
 .input-nome {
-  min-width: 250px;
   padding: 10px;
   font-family: inherit;
   font-size: 24px;

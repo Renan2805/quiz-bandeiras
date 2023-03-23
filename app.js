@@ -27,7 +27,7 @@ function shuffle(arr) {
 }
 
 function filterCountries(arr) {
-  const banList = ['mp', 'gp', 'hk', 'fk', 'cw', 'pn', 'mq', 'cc', 'tf', 'gu', 'mo', 'pr', 'je', 'gg', 'nf', 'tk', 'fo', 'bl', 'im', 'aq', 'mf', 'ky', 'nc', 'ps', 'nu', 'vg', 'ax', 'aw', 'yt', 'bm', 'vi', 'eh', 'um', 'as', 'gf', 'ms', 'pm', 'gi', 'gs', 'sj', 'tc', 'ai', 'pf', 'sx', 'cx', 'wf', 'ck', 'io', 're', 'hm', 'sh', 'gl', 'bes islands', 'saint helena']
+  const banList = ['bv', 'mp', 'gp', 'hk', 'fk', 'cw', 'pn', 'mq', 'cc', 'tf', 'gu', 'mo', 'pr', 'je', 'gg', 'nf', 'tk', 'fo', 'bl', 'im', 'aq', 'mf', 'ky', 'nc', 'ps', 'nu', 'vg', 'ax', 'aw', 'yt', 'bm', 'vi', 'eh', 'um', 'as', 'gf', 'ms', 'pm', 'gi', 'gs', 'sj', 'tc', 'ai', 'pf', 'sx', 'cx', 'wf', 'ck', 'io', 're', 'hm', 'sh', 'gl', 'bes islands', 'saint helena']
   var filteredArr = []
   arr.forEach(val => {
     if(!banList.includes(val.altSpellings[0].toLowerCase())) {
@@ -49,9 +49,9 @@ function createFlag(country) {
   divBandeira.appendChild(imgBandeira)
 
   
-  
   const input = document.createElement('input')
   input.type = 'text'
+  input.style.maxWidth = '326px'
   input.classList.add('input-nome')
   divBandeira.appendChild(input)
 
