@@ -38,7 +38,7 @@ function filterCountries(arr) {
   return filteredArr
 }
 
-function createFlag(country) {
+function createFlag(country, index) {
   const divBandeira = document.createElement('div')
   divBandeira.classList.add('bandeira')
   
@@ -53,6 +53,7 @@ function createFlag(country) {
   input.type = 'text'
   input.style.maxWidth = '326px'
   input.classList.add('input-nome')
+  input.id = index
   divBandeira.appendChild(input)
 
   return {
@@ -66,34 +67,39 @@ function formatarNomePais(nome) {
   return nome.normalize('NFD').replace(/[\u0300-\u036f]/g, "");
 }
 
+function focusNext(currentId) {
+  const next = document.getElementById(`${currentId + 1}`)
+  next.focus()
+}
+
 async function app() {
   const divBandeiras = document.getElementById('bandeiras')
   var data = await fetchData()
 
   shuffle(data)
   countriesArr = filterCountries(data)
-  console.log(countriesArr)
 
-
-  countriesArr.forEach(country => {
+  countriesArr.forEach((country, index) => {
     const names = [
       formatarNomePais(country.name.common).toLowerCase(),
       formatarNomePais(country.translations.por.common).toLowerCase(),
       ... country.altSpellings.map(val => formatarNomePais(val).toLowerCase())
     ]
 
-    const obj = createFlag(country)
+    const obj = createFlag(country, index)
     obj.input.addEventListener('input', (e) => {
       var chute = formatarNomePais(e.target.value).toLowerCase()
       if(names.includes(chute)) {
         e.target.value = country.translations.por.common
         e.target.disabled = true
+        focusNext(Number(obj.input.id))
       }
       
     })
     divBandeiras.appendChild(obj.element)
   })
 
+  teste()
 }
 
 app()
